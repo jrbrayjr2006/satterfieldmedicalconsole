@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="satterfieldWeb">
+<head>
+    <meta charset="UTF-8">
+    <title>Satterfield Medical Administration Console</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/satterfieldmedical.js"></script>
+</head>
+<body ng-controller="surveyController as survey">
+<header>
+    <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="admin.html">Physician Survey Console - Beta</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Admin Console</a></li>
+                    <li><a href="index.html">Logout</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</header>
+<!-- BEGIN site content -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#overview">Overview</a></li>
+                <li><a href="#surveydata">Survey Data</a></li>
+                <li><a href="#exportdata">Export Data</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3">
+            <h2><a name="overview">Overview {{test}}</a></h2>
+            <p>
+                This is the administration console and API documentation for the Physician Survey data
+            </p>
+            <button ng-click="getAllSurveys()" class="btn btn-default">Download Data</button>
+
+            <h2><a name="surveydata">Survey Data</a></h2>
+            <code>/getallsurveys/</code>
+            <p>Click <a href="http://www.strawberry23.net:8080/satterfieldmedical/getallsurveys/">here</a> to test survey service</p>
+            <button ng-click="getAllSurveys()" class="btn btn-default" type="button">Show Survey Data</button>
+            <!--<button ng-click="getInstitutions()" class="btn btn-primary" type="button" value="Show">Get Institutions</button> -->
+            <table class="table">
+                <thead>
+                <th>Site Code</th>
+                <th>Rating</th>
+                <th>Why Feeling</th>
+                <th>Comment</th>
+                <th>Create Date</th>
+                </thead>
+                <tr ng-repeat="sd in surveyData">
+                    <td>{{sd.site_code}}</td>
+                    <td>{{sd.rating}}</td>
+                    <td>{{sd.whyfeeling}}</td>
+                    <td>{{sd.comment}}</td>
+                    <td>{{sd.createdate}}</td>
+                </tr>
+            </table>
+            <h2><a name="exportdata">Export Data</a></h2>
+            <div class="container">
+                <form>
+                    <button class="btn btn-primary" type="button" ng-click="exportToExcel()" value="Show">Export To Excel</button>
+                    <a href="downloads/survey.xls">Excel Spreadsheet</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END site content -->
+
+
+</body>
+</html>
